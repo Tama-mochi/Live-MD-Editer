@@ -1,0 +1,6 @@
+{
+  "name": "Markdown Live Editor",
+  "description": "A real-time Markdown editor with a side-by-side preview pane. Supports GFM, syntax highlighting, theme switching, and auto-saving to local storage.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
