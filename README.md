@@ -1,14 +1,105 @@
-# Run and deploy your AI Studio app
+# Live Markdown Editor
 
-This contains everything you need to run your app locally.
+## 概要
 
-## Run Locally
+**Live Markdown Editor** は、リアルタイムでMarkdownのプレビューが可能な、高機能かつ軽量なウェブアプリケーションです。
+洗練されたUIと豊富な機能を持ち、ドキュメント作成、ノートテイキング、技術ブログの下書きなど、様々な用途で快適な執筆体験を提供します。
 
-**Prerequisites:**  Node.js
+![Live Markdown Editor Screenshot](https://raw.githubusercontent.com/Tama-mochi/Live-MD-Editer/main/public/Live-MD-Editer.png)
 
+## 主な機能
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **📝 リアルタイムプレビュー**: 入力と同時にプレビューが更新され、スムーズな執筆が可能。
+- **🎨 シンタックスハイライト**: 主要なプログラミング言語のコードブロックを美しく表示。
+- **✅ タスクリスト対応**: `[ ]` や `[x]` を使ったタスクリストをサポート。
+- **🌙 ダークモード**: OSの設定に連動する自動切り替えと、手動でのテーマ変更に対応。
+- **💾 自動保存機能**: 入力内容はブラウザの`localStorage`に自動で保存され、次回訪問時も安心。
+- **📜 スクロール同期**: エディタとプレビューのスクロールが同期し、長文でも編集箇所を見失わない。
+- **📤📥 インポート/エクスポート**: 作成したMarkdownファイルをダウンロードしたり、ローカルのファイルを読み込んだりすることが可能。
+- **🌐 どこでもアクセス**: GitHub Pagesでホスティングされており、ブラウザがあればいつでも利用可能。
+- **📱 レスポンシブデザイン**: デスクトップからモバイルまで、様々なデバイスで最適化された表示。
+
+## 使用技術
+
+### フロントエンド
+- **React 19.1.0**: モダンでインタラクティブなUIを構築。
+- **TypeScript 5.7.2**: 型安全性と開発効率を向上。
+- **Vite 6.2.0**: 高速な開発サーバーとビルドツール。
+- **Tailwind CSS**: ユーティリティファーストのアプローチで柔軟なスタイリングを実現。
+  - **@tailwindcss/typography**: Markdownの出力スタイルを一元的に管理。
+
+### Markdown処理
+- **markdown-it 14.1.0**: 高速で拡張性の高いMarkdownパーサー。
+  - `markdown-it-task-lists`: タスクリストの構文をサポート。
+- **react-syntax-highlighter 15.6.1**: コードブロックのシンタックスハイライト。
+- **html-react-parser 5.1.10**: HTML文字列を安全にReactコンポーネントに変換。
+
+### デプロイメント
+- **GitHub Pages**: 静的サイトとしてホスティング。
+- **gh-pages 6.1.1**: ビルド成果物を簡単にデプロイ。
+
+## 使い方
+
+1.  **アクセス**: [Live Markdown Editor](https://tama-mochi.github.io/Live-MD-Editer/)にアクセスします。
+2.  **入力**: 左側のパネルにMarkdownを記述します。
+3.  **プレビュー**: 右側のパネルにリアルタイムで結果が表示されます。
+4.  **テーマ切り替え**: 右上の太陽/月アイコンをクリックして、ライトモードとダークモードを切り替えます。
+5.  **インポート/エクスポート**: 右上のアップロード/ダウンロードアイコンから、ファイルの読み込みと保存ができます。
+
+入力内容は自動的にブラウザに保存されるので、いつでも続きから執筆を再開できます。
+
+## ローカルでの実行方法
+
+### 前提条件
+- Node.js (v18以降を推奨)
+- npm または yarn
+
+### 手順
+1. **リポジトリをクローン:**
+   ```bash
+   git clone https://github.com/Tama-mochi/Live-MD-Editer.git
+   cd Live-MD-Editer
+   ```
+
+2. **依存関係をインストール:**
+   ```bash
+   npm install
+   ```
+
+3. **開発サーバーを起動:**
+   ```bash
+   npm run dev
+   ```
+
+4. **ブラウザで確認:**
+   `http://localhost:5173`（またはターミナルに表示されたアドレス）にアクセスします。
+
+## アーキテクチャの簡単な説明
+
+- **`App.tsx`**: アプリケーションのメインコンポーネント。状態管理、レイアウト、各コンポーネントの統合を担当。
+- **`components/`**:
+  - `MarkdownInput.tsx`: Markdownを入力するためのテキストエリア。
+  - `PreviewPane.tsx`: 入力されたMarkdownをHTMLに変換し、シンタックスハイライトを適用して表示。
+  - `ThemeToggle.tsx`: ライト/ダークモードを切り替えるUIボタン。
+- **`hooks/useLocalStorage.ts`**: `localStorage`とのやり取りをカプセル化し、状態の永続化を容易にするカスタムフック。
+- **`tailwind.config.ts`**: `@tailwindcss/typography`プラグインを用いて、Markdownの表示スタイル（コードブロック、見出しなど）を一元的に定義・管理。
+- **`constants.ts`**: `localStorage`のキーやデフォルトのMarkdownテキストなどの定数を管理。
+- **`types.ts`**: `Theme`などの型定義を管理。
+
+## 対象ユーザー
+
+- **開発者**: 技術ドキュメントや`README.md`の作成、ブログ記事の下書きに。
+- **ライター・ブロガー**: 記事やアイデアを素早く書き留めるためのツールとして。
+- **学生**: 講義ノートやレポートの作成に。
+- **Markdownを手軽に試したい方**: インストール不要で、すぐにMarkdownを試せる環境として。
+
+## 今後の展望
+
+- **UI/UXのさらなる改善**: より直感的で洗練されたUIデザイン。
+- **機能拡張**: ファイルのエクスポート形式（HTML/PDF）の追加、文字数カウント、カスタムCSSの適用機能。
+- **パフォーマンス最適化**: 大量のMarkdownテキストに対するレンダリングパフォーマンスの向上。
+
+---
+
+このプロジェクトは、モダンなWeb技術を活用して、シンプルながらも強力なマークダウン編集環境を提供することを目指しています。
+ぜひ使ってみて、フィードバックをお寄せください！
