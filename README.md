@@ -5,7 +5,6 @@
 **Live Markdown Editor** は、リアルタイムでMarkdownのプレビューが可能な、高機能かつ軽量なウェブアプリケーションです。
 洗練されたUIと豊富な機能を持ち、ドキュメント作成、ノートテイキング、技術ブログの下書きなど、様々な用途で快適な執筆体験を提供します。
 
-![Live Markdown Editor Screenshot](https://raw.githubusercontent.com/Tama-mochi/Live-MD-Editer/main/public/Live-MD-Editer.png)
 
 ## 主な機能
 
